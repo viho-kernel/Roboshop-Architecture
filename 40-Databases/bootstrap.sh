@@ -12,4 +12,4 @@ cd Ansible-Roles-Roboshop
 
 git pull
 
-ansible-playbook -e component=$component -e env=$environment main.yaml
+ansible-playbook -e component=$component -e  environment=$environment main.yaml
