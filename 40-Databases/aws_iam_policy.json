@@ -2,14 +2,10 @@
   "Version": "2012-10-17",
   "Statement": [
     {
-      "Sid": "Statement1",
+      "Sid": "VisualEditor0",
       "Effect": "Allow",
-      "Action": [
-        "ssm:GetParameter",
-        "ssm:GetParameters",
-        "ssm:GetParametersByPath"
-      ],
-      "Resource": "arn:aws:ssm:us-east-1:992989046853:parameter/Roboshop/Dev/mysql_root_password"
+      "Action": "ssm:GetParameter",
+      "Resource":  "arn:aws:ssm:us-east-1:992989046853:parameter/Roboshop/${environment}/mysql_root_password"
     },
     {
       "Sid": "Statement2",
