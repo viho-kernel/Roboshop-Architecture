@@ -41,6 +41,7 @@ resource "aws_instance" "mysql" {
     ami = local.ami_id
     subnet_id = local.database_subnet_id
     vpc_security_group_ids = [local.mysql]
+    iam_instance_profile = aws_iam_instance_profile.mysql.name
     instance_type = "t3.micro"
 
     tags = merge(
