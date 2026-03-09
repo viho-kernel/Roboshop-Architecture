@@ -28,7 +28,7 @@ resource "aws_iam_role" "mysql" {
 resource "aws_iam_policy" "mysql" {
   name        = "${var.project}-${var.environment}-Mysql-Policy"
   description = "A policy for MySQL Ec2 instance"
-  policy      = templatefile("mysql-iam-policy.json", 
+  policy      = templatefile("aws_iam_policy.json", 
   {
     environment=var.environment
   })
