@@ -27,10 +27,4 @@ rabbitmq_policy_name = join("",
 
 ])
 
-rabbitmq_policy_password_name = join("",
-
-  [ for name in ["${var.project}", "${var.environment}", "rabbitmq" , "password" ]
-  : title(name)
-
-])
 }

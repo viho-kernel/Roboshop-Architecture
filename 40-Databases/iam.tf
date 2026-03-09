@@ -74,7 +74,7 @@ resource "aws_iam_role" "rabbitmq"{
 }
 
 resource "aws_iam_policy" "rabbitmq_user" {
-  name        = local.rabbitmq_policy_name
+  name        = "${local.rabbitmq_policy_name}-User"
   description = "A policy for RabbitMQ Ec2 instance"
   policy      = templatefile("rabbitmq-iam-user-policy.json",
   {
@@ -83,7 +83,7 @@ resource "aws_iam_policy" "rabbitmq_user" {
 }
 
 resource "aws_iam_policy" "rabbitmq_password"{
-  name        = local.rabbitmq_policy_password_name
+  name        ="${local.rabbitmq_policy_name}-Password"
   description = "A policy for RabbitMQ Ec2 instance"
   policy      = templatefile("rabbitmq-iam-user-password.json",
   {
