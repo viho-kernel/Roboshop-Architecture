@@ -1,11 +1,11 @@
 variable "project" {
     type = string
-    default = "Roboshop"
+    default = "roboshop"
 }
 
 variable "environment" {
     type = string
-    default = "Dev"
+    default = "dev"
 }
 
 variable "owner" {
