@@ -90,14 +90,14 @@ resource "aws_iam_policy" "rabbitmq_password"{
                 env = var.environment
   })
 }
-resource "aws_iam_role_policy_attachment" "rabbitmq" {
+resource "aws_iam_role_policy_attachment" "rabbitmq_user"{
   role       = aws_iam_role.rabbitmq.name
-  policy_arn = aws_iam_policy.rabbitmq_user.name
+  policy_arn = aws_iam_policy.rabbitmq_user.arn
 }
 
-resource "aws_iam_role_policy_attachment" "rabbitmq" {
+resource "aws_iam_role_policy_attachment" "rabbitmq_password" {
   role       = aws_iam_role.rabbitmq.name
-  policy_arn = aws_iam_policy.rabbitmq_password.name
+  policy_arn = aws_iam_policy.rabbitmq_password.arn
 }
 
 resource "aws_iam_instance_profile" "rabbitmq" {
