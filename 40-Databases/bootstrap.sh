@@ -1,7 +1,7 @@
 #!/bin/bash
 
 component=$1
-enviro=$2
+environment=$2
 dnf install ansible -y
 
 cd /home/ec2-user
@@ -12,4 +12,4 @@ cd Ansible-Roles-Roboshop
 
 git pull
 
-ansible-playbook -e component=$component -e  enviro=$enviro main.yaml
+ansible-playbook -e component=$component -e env=$environment main.yaml
