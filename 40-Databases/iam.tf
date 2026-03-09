@@ -43,3 +43,64 @@ resource "aws_iam_instance_profile" "mysql" {
   name = "${var.project}-${var.environment}-mysql"
   role = aws_iam_role.mysql.name
 }
+
+
+
+resource "aws_iam_role" "rabbitmq"{
+  name = local.rabbitmq_role_name
+
+  # Terraform's "jsonencode" function converts a
+  # Terraform expression result to valid JSON syntax.
+  assume_role_policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Action = "sts:AssumeRole"
+        Effect = "Allow"
+        Sid    = ""
+        Principal = {
+          Service = "ec2.amazonaws.com"
+        }
+      },
+    ]
+  })
+
+  tags = merge(
+    {
+        Name = local.rabbitmq_role_name
+    },
+    local.common_tags
+  )
+}
+
+resource "aws_iam_policy" "rabbitmq_user" {
+  name        = local.rabbitmq_policy_name
+  description = "A policy for RabbitMQ Ec2 instance"
+  policy      = templatefile("rabbitmq-iam-user-policy.json",
+  {
+                env = var.environment
+  })
+}
+
+resource "aws_iam_policy" "rabbitmq_password"{
+  name        = local.rabbitmq_policy_name
+  description = "A policy for RabbitMQ Ec2 instance"
+  policy      = templatefile("rabbitmq-iam-user-password.json",
+  {
+                env = var.environment
+  })
+}
+resource "aws_iam_role_policy_attachment" "rabbitmq" {
+  role       = aws_iam_role.rabbitmq.name
+  policy_arn = aws_iam_policy.rabbitmq_user.name
+}
+
+resource "aws_iam_role_policy_attachment" "rabbitmq" {
+  role       = aws_iam_role.rabbitmq.name
+  policy_arn = aws_iam_policy.rabbitmq_password.name
+}
+
+resource "aws_iam_instance_profile" "rabbitmq" {
+  name = "${var.project}-${var.environment}-rabbitmq"
+  role = aws_iam_role.rabbitmq.name
+}
