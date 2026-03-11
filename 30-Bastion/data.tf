@@ -6,10 +6,6 @@ data "aws_ssm_parameter" "public_subnet" {
     name = "/${var.project}/${var.environment}/public_subnet"
 }
 
-data "aws_ssm_parameter" "vpc_id" {
-    name = "/${var.project}/${var.environment}/VPC"
-}
-
 
 data "aws_ami" "joindevops" {
   most_recent      = true

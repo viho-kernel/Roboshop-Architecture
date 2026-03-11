@@ -44,8 +44,18 @@ resource "aws_security_group_rule" "bastion_rabbitmq" {
   to_port                  = 22
   protocol                 = "tcp"
   source_security_group_id = local.bastion
-  security_group_id        = local.rabbitmq
+  security_group_id        = local.backend_alb
   description              = "Allow ssh access from bastion to rabbitmq host"
+}
+
+resource "aws_security_group_rule" "bastion_backend_alb" {
+  type                     = "ingress"
+  from_port                = 80
+  to_port                  = 80
+  protocol                 = "tcp"
+  source_security_group_id = local.bastion
+  security_group_id        = local.backend_alb
+  description              = "Allow ssh access from bastion to backend alb host"
 }
 
 resource "aws_security_group_rule" "catalogue_mongodb" {
