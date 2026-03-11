@@ -5,8 +5,10 @@ environment=$2
 dnf install ansible -y
 
 cd /home/ec2-user
-git clone https://github.com/daws-88s/ansible-roboshop-roles-tf.git
+git clone https://github.com/viho-kernel/Ansible-Roles-Roboshop.git
 
-cd ansible-roboshop-roles-tf
+cd Ansible-Roles-Roboshop
+
 git pull
-ansible-playbook -e component=$component -e env=$environment roboshop.yaml
+
+ansible-playbook -e component=$component -e env=$environment main.yaml
